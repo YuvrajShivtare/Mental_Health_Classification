@@ -1,15 +1,15 @@
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from flask import Flask,render_template,url_for,request
-from nltk.stem import WordNetLemmatizer
+import nltk
 from sklearn.externals import joblib
 from keras.models import load_model
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 import tensorflow as tf
 import pandas as pd 
 import numpy as np
 import pickle
 import keras
-import nltk
 import re
 physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], enable=True)
