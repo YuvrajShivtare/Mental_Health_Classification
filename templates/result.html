@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+	<header>
+		<div class="container">
+		<div id="brandname">
+		</div>
+		<h2> Mental Health Analysis</h2>
+		
+	</div>
+	</header>
+	<h2 style="font-size:20;text-align: left;"><b>Results for comment:</b></h2>
+	<div class="results">
+
+
+	{% if prediction == 0%}
+	<h3 style="color:red;">Depressed Text</h3>
+	{% elif prediction == 1%}
+	<h3 style="color:red;">Anxiety Text</h3>
+	{% elif prediction == 2%}
+	<h3 style="color:red;">PTSD Text</h3>
+	{% elif prediction == 3%}
+	<h3 style="color:blue;">You are fine, Enjoy!!</h3>
+	{% endif %}
+
+
+	</div>
+
+</body>
+</html>
