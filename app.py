@@ -35,8 +35,8 @@ def clean(text):
     text = [WordNet_Lemmatizer.lemmatize(tokens) for tokens in text]
     return text
 
-nltk.download('stopwords')
-nltk.download('wordnet')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
 WordNet_Lemmatizer = WordNetLemmatizer()
 stop = stopwords.words('english')
 
