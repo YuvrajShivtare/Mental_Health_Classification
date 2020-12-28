@@ -14,9 +14,6 @@ import re
 physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], enable=True)
 
-WordNet_Lemmatizer1 = WordNetLemmatizer()
-stop = stopwords.words('english')
-
 def clean(text):
     text = re.sub(r"[^A-Za-z]", " ",text)
     text = re.sub(r"i'm", "i am",text)
@@ -35,9 +32,13 @@ def clean(text):
     text = re.sub('([.-])+', r'\1',text)
     text = text.lower().split()
     text = [word for word in text if word not in stop]
-    text = [WordNet_Lemmatizer1.lemmatize(tokens) for tokens in text]
+    text = [WordNet_Lemmatizer.lemmatize(tokens) for tokens in text]
     return text
 
+#nltk.download('stopwords')
+#nltk.download('wordnet')
+WordNet_Lemmatizer = WordNetLemmatizer()
+stop = stopwords.words('english')
 
 
 # load the model from disk
