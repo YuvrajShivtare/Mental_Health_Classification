@@ -4,7 +4,6 @@ import keras
 from keras.models import load_model
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pickle
 import re
@@ -49,8 +48,9 @@ def predict():
     message = request.form['message']
     list_of_lists = t1.texts_to_sequences(clean(message))
     flattened  = [val for sublist in list_of_lists for val in sublist]
-    X_test = pad_sequences([flattened], maxlen=149, padding='post')
-    pred = model.predict(X_test[0].reshape(1,149))
+    X_test = np.pad(flattened,(0, 99 - len(flattened)%99),'constant')
+    #X_test = pad_sequences([flattened], maxlen=149, padding='post')
+    pred = model.predict(X_test.reshape(1,99))
     my_prediction = np.argmax(pred)
     return render_template('result.html',prediction = my_prediction)
 
