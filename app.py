@@ -1,16 +1,15 @@
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 from flask import Flask,render_template,url_for,request
 import nltk
-from sklearn.externals import joblib
+import keras
 from keras.models import load_model
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import tensorflow as tf
-import pandas as pd 
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pickle
-import keras
 import re
+
 physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], enable=True)
 
@@ -35,8 +34,6 @@ def clean(text):
     text = [WordNet_Lemmatizer.lemmatize(tokens) for tokens in text]
     return text
 
-#nltk.download('stopwords')
-#nltk.download('wordnet')
 WordNet_Lemmatizer = WordNetLemmatizer()
 stop = stopwords.words('english')
 
@@ -44,7 +41,6 @@ stop = stopwords.words('english')
 # load the model from disk
 file = open("tokenizer.pkl",'rb')
 t1 = pickle.load(file)
-maxLength =149
 app = Flask(__name__)
 
 @app.route('/')
